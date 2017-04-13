@@ -6,7 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.bludbourne.MapManager;
 
 public class MainGameScreen implements Screen{
     private static final String TAG = MainGameScreen.class.getSimpleName();
@@ -147,5 +152,57 @@ public class MainGameScreen implements Screen{
                 ")");
         Gdx.app.debug(TAG, "WorldRenderer: physical: (" + VIEWPORT.physicalWidth + ", " + VIEWPORT.physicalHeight +
                 ")");
+    }
+
+    private boolean isCollisionWithMapLayer(Rectangle boundingBox){
+        MapLayer mapCollisionLayer = mapMgr.getCollisionLayer();
+
+        if (mapCollisionLayer == null){
+            return false;
+        }
+
+        Rectangle rectangle = null;
+
+        for (MapObject object: mapCollisionLayer.getObjects()){
+            if (object instanceof RectangleMapObject) {
+
+                rectangle = ((RectangleMapObject)object).getRectangle();
+                if (boundingBox.overlaps(rectangle)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    private boolean updatePortalLayerActivation(Rectangle boundingBox){
+        MapLayer mapPortalLayer = mapMgr.getPortalLayer();
+
+        if (mapPortalLayer == null){
+            return false;
+        }
+
+        Rectangle rectangle = null;
+
+        for (MapObject object: mapPortalLayer.getObjects()){
+            if (object instanceof RectangleMapObject){
+                rectangle = ((RectangleMapObject)object).getRectangle();
+                if (boundingBox.overlaps(rectangle)){
+                    String mapName = object.getName();
+                    if (mapName == null){
+                        return false;
+                    }
+                    mapMgr.setClosestStartPositionFromScaledUnits(player.getCurrentPosition());
+                    mapMgr.loadMap(mapName);
+                    player.init(mapMgr.getPlayerStartUnitScaled().x, mapMgr.getPlayerStartUnitScaled().y);
+                    mapRenderer.setMap(mapMgr.getCurrentMap());
+                    Gdx.app.debug(TAG, "Portal Activated");
+                    return true;
+
+                }
+            }
+        }
+        return false;
     }
 }
