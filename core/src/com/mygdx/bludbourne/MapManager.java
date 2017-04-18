@@ -150,7 +150,7 @@ public class MapManager {
         playerStartLocationTable.put(currentMapName, closestPlayerStartPosition.cpy());
     }
 
-    public void setClosestPlayerStartPositionFromScaledUnits(Vector2 position){
+    public void setClosestStartPositionFromScaledUnits(Vector2 position){
         if (UNIT_SCALE <= 0){
             return;
         }
