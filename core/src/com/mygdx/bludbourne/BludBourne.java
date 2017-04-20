@@ -1,15 +1,18 @@
 package com.mygdx.bludbourne;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.mygdx.bludbourne.screens.MainGameScreen;
 
 public class BludBourne extends Game {
 
 	public static final MainGameScreen mainGameScreen = new MainGameScreen();
+
 	
 	@Override
 	public void create () {
 		setScreen(mainGameScreen);
+
 
 	}
 

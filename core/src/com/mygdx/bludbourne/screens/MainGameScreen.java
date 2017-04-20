@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.bludbourne.Entity;
 import com.mygdx.bludbourne.MapManager;
+import com.mygdx.bludbourne.PlayerController;
 
 public class MainGameScreen implements Screen{
     private static final String TAG = MainGameScreen.class.getSimpleName();

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Entity {
 
     private static final String TAG = Entity.class.getSimpleName();
-    private static final String defaultSpritePath = "sprites/character/Warrior.png";
+    private static final String defaultSpritePath = "sprites/characters/Warrior.png";
 
     private Vector2 velocity;
     private String entityID;
