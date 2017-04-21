@@ -45,7 +45,7 @@ public class MainGameScreen implements Screen{
     @Override
     public void show(){
         // camera setup
-        setupViewort(10,10);
+        setupViewport(10,10);
 
         // get the current size
         camera = new OrthographicCamera();
@@ -89,6 +89,8 @@ public class MainGameScreen implements Screen{
         }
         controller.update(delta);
 
+
+
         mapRenderer.setView(camera);
         mapRenderer.render();
 
@@ -122,7 +124,7 @@ public class MainGameScreen implements Screen{
 
     }
 
-    private void setupViewort(int width, int height){
+    private void setupViewport(int width, int height){
         // Make the viewport a percentage of the total display area
         VIEWPORT.virtualWidth = width;
         VIEWPORT.virtualHeight = height;

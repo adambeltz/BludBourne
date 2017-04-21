@@ -12,18 +12,12 @@ public class BludBourne extends Game {
 	@Override
 	public void create () {
 		setScreen(mainGameScreen);
-
-
 	}
 
-	@Override
-	public void render () {
 
-	}
 	
 	@Override
 	public void dispose () {
 		mainGameScreen.dispose();
-
 	}
 }
